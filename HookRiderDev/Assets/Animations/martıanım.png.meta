@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -121,7 +121,196 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: "mart\u0131an\u0131m_0"
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 86
+        width: 21
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a20078e309abbcd4eacf7b8121171cc8
+      internalID: -709095354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "mart\u0131an\u0131m_1"
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 87
+        width: 17
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ce7286fa93993a42b8769e923b9e13f
+      internalID: -247754437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "mart\u0131an\u0131m_2"
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 87
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c71a795e74826e04fa114dd4071fbe96
+      internalID: 1303932496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "mart\u0131an\u0131m_3"
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 85
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53a9dbeeb480f694f9275df149350889
+      internalID: 477808861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "mart\u0131an\u0131m_4"
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 70
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc3c46f2c9124e24da8cdcd6dd1fc3e8
+      internalID: 1691014907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "mart\u0131an\u0131m_5"
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 73
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6868ccd9d9e6b54aac309f260ab37a0
+      internalID: 1942686537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "mart\u0131an\u0131m_6"
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 74
+        width: 16
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ade68657559a2cb4e804aa819a8bc676
+      internalID: 210443960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "mart\u0131an\u0131m_7"
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 74
+        width: 17
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 089f1b414364a7b4ab16e99e92246897
+      internalID: -720060369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "mart\u0131an\u0131m_8"
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 55
+        width: 21
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9891aa4961fa528429919a137dc5c924
+      internalID: 1409436230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +321,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      "mart\u0131an\u0131m_0": -709095354
+      "mart\u0131an\u0131m_1": -247754437
+      "mart\u0131an\u0131m_2": 1303932496
+      "mart\u0131an\u0131m_3": 477808861
+      "mart\u0131an\u0131m_4": 1691014907
+      "mart\u0131an\u0131m_5": 1942686537
+      "mart\u0131an\u0131m_6": 210443960
+      "mart\u0131an\u0131m_7": -720060369
+      "mart\u0131an\u0131m_8": 1409436230
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
