@@ -114,37 +114,31 @@ public class HookShoot : MonoBehaviour
     }
 
     IEnumerator BounceBack()
-{
-    isBouncing = true;
-    float elapsedTime = 0f;
-    Vector3 wallPosition = transform.position;  // Duvara çarpılan pozisyonu kaydet
-    Vector3 peakPosition = new Vector3((startPosition.x + wallPosition.x) / 2, wallPosition.y + bounceHeight, startPosition.z);  // Parabolün zirve noktası
-
-    while (elapsedTime < bounceDuration)
     {
-        float t = elapsedTime / bounceDuration;
+        isBouncing = true;
+        float elapsedTime = 0f;
+        Vector3 wallPosition = transform.position;  // Duvara çarpılan pozisyonu kaydet
+        Vector3 peakPosition = new Vector3((startPosition.x + wallPosition.x) / 2, Mathf.Max(wallPosition.y + bounceHeight, bounceHeight), startPosition.z);  // Parabolün zirve noktası
 
-        // Yatay hareket (X ekseni) için parabolün başlangıcından ortasına doğru interpolasyon
-        float newX = Mathf.Lerp(wallPosition.x, startPosition.x, t);
-
-        // Dikey hareket (Y ekseni) için parabolik bir interpolasyon sağlıyoruz
-        float newY = Mathf.Lerp(wallPosition.y, startPosition.y, t) + bounceHeight * Mathf.Sin(Mathf.PI * t);  // Parabolik yay için Sin fonksiyonu
-
-        // Karakterin yeni pozisyonunu ayarla
-        transform.position = new Vector3(newX, newY, transform.position.z);
-
-        // Eğer karakter zemine ulaştıysa (Zemin ile temas tespiti)
-        if (transform.position.y <= 0.1f)  // 0.1f ile zemine çok yakın olduğunda durmasını sağlıyoruz
+        while (elapsedTime < bounceDuration)
         {
-            transform.position = new Vector3(transform.position.x, 0f, transform.position.z);  // Karakteri zemine sabitle
-            break;  // Coroutine'yi bitir
+            float t = elapsedTime / bounceDuration;
+
+            // Yatay hareket (X ekseni) için lineer interpolasyon
+            float newX = Mathf.Lerp(wallPosition.x, startPosition.x, t);
+
+            // Dikey hareket (Y ekseni) için parabolik bir interpolasyon sağlıyoruz
+            float newY = Mathf.Lerp(wallPosition.y, startPosition.y, t) + bounceHeight * Mathf.Sin(Mathf.PI * t);  // Parabolik yay için Sin fonksiyonu
+
+            // Karakterin yeni pozisyonunu ayarla
+            transform.position = new Vector3(newX, newY, transform.position.z);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
-        elapsedTime += Time.deltaTime;
-        yield return null;
+        // Karakter başlangıç pozisyonuna ulaşır
+        transform.position = startPosition;
+        isBouncing = false;
     }
-
-    isBouncing = false;
-}
-
 }
