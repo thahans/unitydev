@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2748155297467121697}
   - component: {fileID: 9191078116345998765}
+  - component: {fileID: 1311068757224087126}
   - component: {fileID: 1040337487643340617}
-  - component: {fileID: -8855421084505987870}
   m_Layer: 3
   m_Name: wall3
   m_TagString: Wall
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 516776974, guid: c50ca3410267eb14f84f3f1c8b4fb8e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -86,6 +86,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1311068757224087126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7141338835132646473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e424db2ca0596c2408ccb3dd921e9371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallSpeed: 2
 --- !u!61 &1040337487643340617
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -131,16 +144,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.06, y: 0.43}
   m_EdgeRadius: 0
---- !u!114 &-8855421084505987870
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7141338835132646473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e424db2ca0596c2408ccb3dd921e9371, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallSpeed: 2
