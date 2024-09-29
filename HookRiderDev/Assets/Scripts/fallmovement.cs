@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class WallMovementScript : MonoBehaviour
 {
-    public float fallSpeed = 2f; // Duvarýn aþaðýya doðru hareket hýzý
+    public float fallSpeed = 2f; // Duvarï¿½n aï¿½aï¿½ï¿½ya doï¿½ru hareket hï¿½zï¿½
+    public bool isGameStarted = false; // Oyun baÅŸladÄ±ÄŸÄ±nda true olacak
 
     void Update()
     {
-        // Duvarýn yavaþ yavaþ aþaðýya doðru hareketi (y ekseninde)
+        // Duvarï¿½n yavaï¿½ yavaï¿½ aï¿½aï¿½ï¿½ya doï¿½ru hareketi (y ekseninde)
         transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
+
+            // Sadece oyun baÅŸladÄ±ysa duvarlar ve zemin hareket etsin
+        if (isGameStarted)
+        {
+            transform.Translate(Vector2.down * fallSpeed * Time.deltaTime);
+        }
     }
 
-    // Duvar ekranýn altýna indiðinde yok edilsin (performans açýsýndan önemli)
+    // Duvar ekranï¿½n altï¿½na indiï¿½inde yok edilsin (performans aï¿½ï¿½sï¿½ndan ï¿½nemli)
     void OnBecameInvisible()
     {
         Destroy(gameObject);

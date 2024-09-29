@@ -20,6 +20,8 @@ public class HookShoot : MonoBehaviour
     private bool isRetracting = false; // Karakteri çekme işlemi başlıyor mu?
     private bool isBouncing = false; // Parabolik hareket başladı mı?
     private Vector3 startPosition; // Karakterin başlangıç pozisyonu
+    private bool isGameStarted = false; // Oyun başladı mı? kontrolü
+    private bool isSlowMotionTriggered = false; // Ağır çekim tetiklendi mi?
 
     void Start()
     {
@@ -41,19 +43,6 @@ public class HookShoot : MonoBehaviour
 
         // Karakterin Z rotasyonunu sürekli sıfırla (takla atmaması için)
         transform.rotation = Quaternion.Euler(0, 0, 0);
-    }
-
-    void ShootHook()
-    {
-        // Hook'u üçgenin ucuna doğru fırlat
-        currentHook = Instantiate(hookPrefab, triangle.position, triangle.rotation);
-
-        // Hook'un hedef noktasını üçgenin yönü doğrultusunda belirle
-        hookTarget = triangle.position + triangle.up * 10f; // 10 birim uzağa fırlatılacak (mesafeyi isteğine göre ayarlayabilirsin)
-        initialHookScale = currentHook.localScale; // Hook'un ilk boyutunu kaydet
-
-        // Hook'u ileri doğru hareket ettir ve uzat
-        StartCoroutine(MoveHook());
     }
 
     IEnumerator MoveHook()
@@ -99,18 +88,53 @@ public class HookShoot : MonoBehaviour
 
     void ReleaseHook()
     {
-        // Hook'u yok et
         if (currentHook != null)
         {
             Destroy(currentHook.gameObject);
-            currentHook = null; // currentHook'u null yap
+            currentHook = null;
         }
 
         isHooked = false;
         isRetracting = false;
 
-        // Parabolik sekme hareketini başlat
+        // Parabolik zıplama tamamlandı, ağır çekimi başlat
         StartCoroutine(BounceBack());
+    }
+
+    IEnumerator SlowMotionAfterBounce()
+    {
+        // Ağır çekime geç
+        Time.timeScale = 0.1f;
+
+        float elapsedTime = 0f;
+        while (elapsedTime < 3f)
+        {
+            elapsedTime += Time.unscaledDeltaTime;
+
+            // Eğer oyuncu 3 saniye içinde tekrar hook atarsa
+            if (Input.GetMouseButtonDown(0))
+            {
+                Time.timeScale = 1f;
+                yield break;
+            }
+
+            yield return null;
+        }
+
+        // 3 saniye boyunca etkileşim olmazsa karakter ölecek
+        Time.timeScale = 1f;
+        CharacterFallsAndDies();
+
+        // Ağır çekim sona erdi, tetikleyici bayrağı sıfırla
+        isSlowMotionTriggered = false;
+    }
+
+    void CharacterFallsAndDies()
+    {
+        // Karakterin ölmesi ve oyun durumu
+        Debug.Log("Karakter öldü!");
+        Time.timeScale = 0f;
+        ShowDeathScreen();
     }
 
     IEnumerator BounceBack()
@@ -140,5 +164,45 @@ public class HookShoot : MonoBehaviour
         // Karakter başlangıç pozisyonuna ulaşır
         transform.position = startPosition;
         isBouncing = false;
+    }
+
+    void ShootHook()
+    {
+        if (!isGameStarted)
+        {
+            // Oyun başlıyor
+            isGameStarted = true;
+        }
+
+        currentHook = Instantiate(hookPrefab, triangle.position, triangle.rotation);
+        hookTarget = triangle.position + triangle.up * 10f;
+        initialHookScale = currentHook.localScale;
+
+        StartCoroutine(MoveHook());
+    }
+
+    void ShowDeathScreen()
+    {
+        // UI ölüm ekranını açma kodu buraya yazılabilir
+        // örneğin: deathScreenUI.SetActive(true);
+    }
+
+    // Karakterin ağır çekim bölgesine girdiğini kontrol eden tetikleyici
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("SlowMotionZone") && !isSlowMotionTriggered)
+        {
+            isSlowMotionTriggered = true;  // Ağır çekim tetiklendi
+            StartCoroutine(SlowMotionAfterBounce());
+        }
+    }
+
+    // Karakter ağır çekim bölgesinden çıktığında bayrağı sıfırla
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("SlowMotionZone"))
+        {
+            isSlowMotionTriggered = false;  // Ağır çekim bölgesinden çıktı, tekrar tetiklenebilir
+        }
     }
 }
