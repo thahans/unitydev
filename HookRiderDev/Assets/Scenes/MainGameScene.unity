@@ -836,7 +836,7 @@ MonoBehaviour:
   triangle: {fileID: 833996134}
   centerPoint: {fileID: 1714925854}
   radius: 0.72
-  rotationSpeed: 85
+  rotationSpeed: 1000
 --- !u!1 &875830818 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6738032318566437531, guid: afbafda5affd25f46a03950190970623, type: 3}
@@ -1050,10 +1050,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.022764444}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1064,7 +1064,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.9544711}
   m_EdgeRadius: 0
 --- !u!212 &1153144840
 SpriteRenderer:
@@ -1426,6 +1426,10 @@ MonoBehaviour:
   bounceDuration: 1
   gravity: -9.8
   raycastDistance: 0.05
+  scoreText: {fileID: 1836691411}
+  hookAimScript: {fileID: 833996135}
+  slowMotionZoneTransform: {fileID: 1153144841}
+  slowMotionZoneMoveSpeed: 1.6
 --- !u!1 &1724453957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1515,7 +1519,7 @@ GameObject:
   - component: {fileID: 1836691412}
   - component: {fileID: 1836691411}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: scoretext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1913,12 +1917,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4156104665546824949, guid: efff59fec47718b46b07dfcadacf0b34, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156104665546824949, guid: efff59fec47718b46b07dfcadacf0b34, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 12.88
+      objectReference: {fileID: 0}
+    - target: {fileID: 4156104665546824949, guid: efff59fec47718b46b07dfcadacf0b34, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.91
+      value: -9.07
       objectReference: {fileID: 0}
     - target: {fileID: 4156104665546824949, guid: efff59fec47718b46b07dfcadacf0b34, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.59
+      value: 5.17
       objectReference: {fileID: 0}
     - target: {fileID: 4156104665546824949, guid: efff59fec47718b46b07dfcadacf0b34, type: 3}
       propertyPath: m_LocalPosition.z
