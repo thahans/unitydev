@@ -14,8 +14,8 @@ public class HookShoot : MonoBehaviour
     public float gravity = -9.8f;  
     public float raycastDistance = 0.05f;  
 
-    public TextMeshProUGUI scoreText;  // Skoru göstermek için TextMeshPro referansı
-    private int score = 0;  // Skor değişkeni
+    public TextMeshProUGUI scoreText;  
+    private int score = 0;  
 
     private Transform currentHook;  
     private bool isHooked = false;  
@@ -27,25 +27,27 @@ public class HookShoot : MonoBehaviour
     private bool isGameStarted = false; 
     private bool isSlowMotionTriggered = false;
     
-    public HookAim hookAimScript;  // HookAim scriptine referans
-    private bool isInSlowMotionZone = false;  // Karakter slow motion bölgesinde mi?
+    public HookAim hookAimScript;  
+    private bool isInSlowMotionZone = false;  
 
     // Yeni eklenen değişkenler
-    public Transform slowMotionZoneTransform;  // Görünmez kare için referans
-    public float slowMotionZoneMoveSpeed = 0.5f;  // Karenin yavaşça aşağıya kayma hızı
-    private Vector3 slowMotionZoneStartPos;  // Karenin başlangıç pozisyonu
-    private bool isZoneMovingDown = false;  // Kare aşağıya kayıyor mu?
+    public Transform slowMotionZoneTransform;  
+    public float slowMotionZoneMoveSpeed = 0.9f;  
+    private Vector3 slowMotionZoneStartPos;  
+    private bool isZoneMovingDown = false;  
+
+    private bool isCoroutineRunning = false;  // Coroutine'un çalışıp çalışmadığını kontrol etmek için
+    private bool hasFallen = false;  // Karakterin düştüğünü kontrol etmek için
 
     void Start()
     {
         startPosition = transform.position;  
-        slowMotionZoneStartPos = slowMotionZoneTransform.position;  // Karenin başlangıç pozisyonunu kaydediyoruz
-        UpdateScoreText();  // Oyun başladığında skoru güncelle
+        slowMotionZoneStartPos = slowMotionZoneTransform.position;  
+        UpdateScoreText();  
     }
 
     void Update()
     {
-        // Sadece "isInSlowMotionZone" true olduğunda hook atabilir
         if (Input.GetMouseButtonDown(0) && currentHook == null && isInSlowMotionZone)
         {
             ShootHook();
@@ -58,7 +60,6 @@ public class HookShoot : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        // Eğer kare hareket ediyorsa onu yavaşça aşağıya kaydır
         if (isZoneMovingDown)
         {
             MoveSlowMotionZoneDown();
@@ -67,7 +68,6 @@ public class HookShoot : MonoBehaviour
 
     void MoveSlowMotionZoneDown()
     {
-        // Kareyi yavaşça aşağıya doğru hareket ettir
         slowMotionZoneTransform.position += Vector3.down * slowMotionZoneMoveSpeed * Time.deltaTime;
         
         // Karakteri de kare ile beraber aşağıya hareket ettir
@@ -76,13 +76,13 @@ public class HookShoot : MonoBehaviour
 
     void ResetSlowMotionZonePosition()
     {
-        slowMotionZoneTransform.position = slowMotionZoneStartPos;  // Kareyi başlangıç pozisyonuna döndür
+        slowMotionZoneTransform.position = slowMotionZoneStartPos;  
     }
 
     IEnumerator SlowMotionAfterBounce()
     {
         Time.timeScale = 0.1f;
-        isZoneMovingDown = true;  // Kareyi aşağıya kaydırmaya başla
+        isZoneMovingDown = true;  
 
         float elapsedTime = 0f;
         while (elapsedTime < 3f)
@@ -93,19 +93,56 @@ public class HookShoot : MonoBehaviour
             {
                 Time.timeScale = 1f;
                 isSlowMotionTriggered = false;
-                isZoneMovingDown = false;  // Hareketi durdur
-                ResetSlowMotionZonePosition();  // Kareyi başlangıç pozisyonuna geri döndür
+                isZoneMovingDown = false;  
+                ResetSlowMotionZonePosition();  
                 yield break;
             }
 
             yield return null;
         }
 
-        // Slow motion süresi bittiğinde zaman hızını normale döndür
         Time.timeScale = 1f;
         isSlowMotionTriggered = false;
-        isZoneMovingDown = false;  // Hareketi durdur
-        ResetSlowMotionZonePosition();  // Kareyi başlangıç pozisyonuna geri döndür
+        isZoneMovingDown = false;  
+        ResetSlowMotionZonePosition();  
+
+        // Altındaki karenin collider'ını kaldır ve karakteri düşür
+        RemoveColliderAndDropCharacter();
+    }
+
+    void RemoveColliderAndDropCharacter()
+    {
+        // Eğer karakter henüz düşmemişse
+        if (!hasFallen)
+        {
+            hasFallen = true;  // Düşme işleminin başladığını belirt
+
+            // Burada görünmez karenin collider'ını kaldırıyoruz
+            // Eğer görünmez kare bir GameObject ise
+            // Destroy(slowMotionZoneTransform.gameObject); // veya collider'ını kapatabilirsin
+            slowMotionZoneTransform.GetComponent<Collider2D>().enabled = false;
+
+            // Karakterin aşağı düşmesini sağla
+            StartCoroutine(DropCharacter());
+        }
+    }
+
+    IEnumerator DropCharacter()
+    {
+        float fallDuration = 2f;  // 2 saniyelik düşüş süresi
+        float elapsedTime = 0f;
+        Vector3 initialPosition = transform.position;
+
+        while (elapsedTime < fallDuration)
+        {
+            float t = elapsedTime / fallDuration;
+            transform.position = Vector3.Lerp(initialPosition, initialPosition + Vector3.down * 30f, t);  // Aşağı doğru düşüş
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Düşüş tamamlandıktan sonra ölüm ekranını göster
+        ShowDeathScreen();
     }
 
     IEnumerator BounceBack()
@@ -129,7 +166,7 @@ public class HookShoot : MonoBehaviour
 
         transform.position = startPosition;
         isBouncing = false;
-        ResetSlowMotionZonePosition();  // Duvara sektiğinde kareyi başlangıç noktasına döndür
+        ResetSlowMotionZonePosition();  
     }
 
     void ShootHook()
@@ -148,9 +185,7 @@ public class HookShoot : MonoBehaviour
 
     void ShowDeathScreen()
     {
-        // Ölüm ekranı işlemleri
-        Time.timeScale = 0; // Oyunu durdur
-        // Ölüm ekranı UI'sını göster (bu kısmı ihtiyacına göre düzenle)
+        Time.timeScale = 0; 
         Debug.Log("Ölüm ekranı açıldı!");
     }
 
@@ -169,7 +204,6 @@ public class HookShoot : MonoBehaviour
                 isRetracting = true;
                 StopCoroutine(MoveHook());
                 
-                // Başarılı hook sonrası puan ekle
                 AddScore(1);  
             }
 
@@ -202,7 +236,6 @@ public class HookShoot : MonoBehaviour
         StartCoroutine(BounceBack());
     }
 
-    // Slow motion bölgesine giriş ve çıkışları kontrol et
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("SlowMotionZone"))
@@ -211,7 +244,12 @@ public class HookShoot : MonoBehaviour
             isInSlowMotionZone = true;
 
             hookAimScript.SetTriangleActive(true);
-            StartCoroutine(SlowMotionAfterBounce());
+            isZoneMovingDown = true;  // Karayı aşağıya kaydırmaya başla
+            if (!isCoroutineRunning)  // Coroutine'u bir kez başlat
+            {
+                StartCoroutine(SlowMotionAfterBounce());
+                isCoroutineRunning = true;  // Coroutine çalışıyor
+            }
         }
     }
 
@@ -221,17 +259,18 @@ public class HookShoot : MonoBehaviour
         {
             isInSlowMotionZone = false;
             hookAimScript.SetTriangleActive(false);
+            isZoneMovingDown = false;  // Karayı durdur
+            ResetSlowMotionZonePosition();  // Kareyi başlangıç noktasına döndür
+            isCoroutineRunning = false;  // Coroutine çalışmayı bıraksın
         }
     }
 
-    // Skoru artır ve ekrana yansıt
     void AddScore(int points)
     {
         score += points;
         UpdateScoreText();
     }
 
-    // Skor metnini güncelle
     void UpdateScoreText()
     {
         scoreText.text = score.ToString();
