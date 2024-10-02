@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8953342599988672543}
   - component: {fileID: 5599397700923631137}
+  - component: {fileID: 3110601326876981999}
   - component: {fileID: 4487232944843009985}
-  - component: {fileID: -6974547562753512990}
   - component: {fileID: 491328526693572442}
   m_Layer: 0
-  m_Name: "mart\u0131an\u0131m"
+  m_Name: "mart\u0131an\u0131mtoright"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,10 +75,10 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: -709095354, guid: c7f9b6669b33f6940b091adc105243e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.21, y: 0.08}
@@ -87,6 +87,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3110601326876981999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7343129477590232866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26db33e1e89696648a3ee30b9283db88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offScreenThresholdLeft: -5
+  offScreenThresholdRight: 5
+  destroyDelay: 3
 --- !u!95 &4487232944843009985
 Animator:
   serializedVersion: 5
@@ -108,20 +123,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-6974547562753512990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7343129477590232866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26db33e1e89696648a3ee30b9283db88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offScreenThreshold: -10
-  destroyDelay: 1
 --- !u!50 &491328526693572442
 Rigidbody2D:
   serializedVersion: 4

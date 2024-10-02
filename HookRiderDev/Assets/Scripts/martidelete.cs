@@ -3,13 +3,14 @@ using UnityEngine;
 
 public class Bird : MonoBehaviour
 {
-    public float offScreenThreshold = -10f; // Ekranýn dýþýna çýkýþ eþiði
-    public float destroyDelay = 3f;          // Yok olma süresi
+    public float offScreenThresholdLeft = -10f; // Ekranýn sol dýþýna çýkýþ eþiði
+    public float offScreenThresholdRight = 10f;  // Ekranýn sað dýþýna çýkýþ eþiði
+    public float destroyDelay = 3f;               // Yok olma süresi
 
     void Update()
     {
-        // Eðer martý ekranýn solundan çýktýysa
-        if (transform.position.x < offScreenThreshold)
+        // Eðer kuþ ekranýn solundan veya saðýndan çýktýysa
+        if (transform.position.x < offScreenThresholdLeft || transform.position.x > offScreenThresholdRight)
         {
             StartCoroutine(DestroyAfterDelay());
         }

@@ -601,7 +601,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4553281542858955501, guid: 4c888a856d3cdfd4e85bf7f6dbe063be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.8390621
+      value: 2.65
       objectReference: {fileID: 0}
     - target: {fileID: 4553281542858955501, guid: 4c888a856d3cdfd4e85bf7f6dbe063be, type: 3}
       propertyPath: m_LocalPosition.y
@@ -984,7 +984,7 @@ Transform:
   m_GameObject: {fileID: 953875261}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.96, y: 0.24, z: -9.935141}
+  m_LocalPosition: {x: 2.65, y: 0.24, z: -9.935141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1003,6 +1003,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 6944408838128018373, guid: 4c888a856d3cdfd4e85bf7f6dbe063be, type: 3}
+  spawnerlowersecond: 2
+  spawneruppersecond: 5
 --- !u!1 &1153144838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,7 +1229,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4553281542858955501, guid: 4c888a856d3cdfd4e85bf7f6dbe063be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.839062
+      value: 2.65
       objectReference: {fileID: 0}
     - target: {fileID: 4553281542858955501, guid: 4c888a856d3cdfd4e85bf7f6dbe063be, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1285,7 +1287,7 @@ GameObject:
   - component: {fileID: 1470412678}
   - component: {fileID: 1470412677}
   m_Layer: 0
-  m_Name: BirdSpawnerLeft
+  m_Name: BirdSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1303,15 +1305,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fe4efb245e7ba48b7bb4b0b9ca9074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdPrefab: {fileID: 7343129477590232866, guid: 2491d4f3a1c8f4e4997c908520e335d0, type: 3}
+  birdPrefabLeft: {fileID: 7343129477590232866, guid: 2491d4f3a1c8f4e4997c908520e335d0, type: 3}
+  birdPrefabRight: {fileID: 7343129477590232866, guid: f9db059007eff3440b72b0313fb935d9, type: 3}
   spawnPoints:
-  - {fileID: 1470412678}
-  birdSpeed: 1
-  spawnTimes:
-  - 2
-  - 5
-  - 10
-  - 20
+  - {x: -6.5, y: 2}
+  - {x: -6.5, y: 2.5}
+  - {x: -6.5, y: 3}
+  - {x: 6, y: 2}
+  - {x: 6, y: 2.5}
+  - {x: 6, y: 3}
+  minSpawnTime: 1
+  maxSpawnTime: 2
+  birdSpeed: 3
 --- !u!4 &1470412678
 Transform:
   m_ObjectHideFlags: 0
@@ -1540,7 +1545,7 @@ Transform:
   m_GameObject: {fileID: 1724453957}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.99, y: 0.12, z: -9.935141}
+  m_LocalPosition: {x: -2.66, y: 0.12, z: -9.935141}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1559,6 +1564,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 8253400583110923266, guid: efca194ad4d954243b3ccdece2859a5b, type: 3}
+  spawnerlowersecond: 2
+  spawneruppersecond: 5
 --- !u!1 &1811998837
 GameObject:
   m_ObjectHideFlags: 0
@@ -1725,6 +1732,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1836691409}
   m_CullTransparentMesh: 1
+--- !u!1 &1943334283
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1943334284}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1943334284
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1943334283}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.3, y: 3.77, z: -9.883249}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1948123863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1735,7 +1773,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3628722818988226071, guid: efca194ad4d954243b3ccdece2859a5b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9044603
+      value: -2.66
       objectReference: {fileID: 0}
     - target: {fileID: 3628722818988226071, guid: efca194ad4d954243b3ccdece2859a5b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2143,3 +2181,4 @@ SceneRoots:
   - {fileID: 1811998838}
   - {fileID: 1289515067}
   - {fileID: 1153144841}
+  - {fileID: 1943334284}

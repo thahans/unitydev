@@ -5,11 +5,13 @@ public class WallSpawnerScript : MonoBehaviour
     public GameObject wallPrefab;  // Duvar prefab'ý
     private float spawnRate;       // Duvarlarýn kaç saniyede bir spawnlanacaðý
     private float timer = 0f;
+    public float spawnerlowersecond = 2f;
+    public float spawneruppersecond = 5f;
 
     void Start()
     {
         // Ýlk baþta spawnRate'i rastgele ayarla
-        spawnRate = Random.Range(2f, 5f);
+        spawnRate = Random.Range(spawnerlowersecond, spawneruppersecond);
     }
 
     void Update()

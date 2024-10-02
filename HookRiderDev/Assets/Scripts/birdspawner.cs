@@ -4,70 +4,71 @@ using UnityEngine;
 
 public class BirdSpawner : MonoBehaviour
 {
-    public GameObject birdPrefab;    // Kuþ prefab'i
-    public Transform[] spawnPoints;  // Spawnlanacak noktalar
-    public float birdSpeed = 5f;     // Kuþun hýzý
+    public GameObject birdPrefabLeft;  // Soldan saða giden kuþ prefab'i
+    public GameObject birdPrefabRight; // Saðdan sola giden kuþ prefab'i
+    public Vector2[] spawnPoints;      // Kuþlarýn spawnlanacaðý 6 farklý X ve Y koordinatlarý
 
-    // Kuþun spawnlanacaðý saniyeleri belirten bir liste
-    public List<float> spawnTimes = new List<float> { 2f, 5f, 10f, 20f }; // Ýstediðin saniyeleri buraya ekle
+    public float minSpawnTime = 2f;    // Min spawn süresi
+    public float maxSpawnTime = 5f;    // Max spawn süresi
+    public float birdSpeed = 5f;       // Kuþlarýn hýzý
 
-    private int currentIndex = 0;    // Mevcut kontrol edilen saniye indeksi
-    private float timer = 0f;        // Sayaç
+    private float spawnTimer = 0f;     // Spawn için sayaç
+    private float randomSpawnTime;     // Rastgele spawn zamaný
 
-    // Baþlangýçta çalýþan fonksiyon
     void Start()
     {
-        // Coroutine baþlat, saniye sayacý çalýþsýn
-        StartCoroutine(SpawnBirdAtSpecificTimes());
+        // Ýlk rastgele spawn zamanýný ayarla
+        randomSpawnTime = Random.Range(minSpawnTime, maxSpawnTime);
     }
 
-    // Belirli saniyelerde kuþ spawnlayan coroutine
-    IEnumerator SpawnBirdAtSpecificTimes()
+    void Update()
     {
-        while (currentIndex < spawnTimes.Count)
+        // Sayaç ilerlesin
+        spawnTimer += Time.deltaTime;
+
+        // Eðer sayaç rastgele belirlenen spawn süresine ulaþtýysa kuþ spawnla
+        if (spawnTimer >= randomSpawnTime)
         {
-            // Zamaný artýr
-            timer += Time.deltaTime;
-
-            // Eðer sýradaki spawn zamaný geldiyse kuþ spawnla
-            if (timer >= spawnTimes[currentIndex])
-            {
-                SpawnBird(); // Kuþ spawnlama fonksiyonunu çalýþtýr
-                currentIndex++; // Sýradaki zaman dilimine geç
-            }
-
-            yield return null; // Bir sonraki frame'i bekle
+            SpawnBird();
+            spawnTimer = 0f; // Sayaç sýfýrlanýr
+            randomSpawnTime = Random.Range(minSpawnTime, maxSpawnTime); // Yeni bir rastgele zaman ayarlanýr
         }
     }
 
     // Kuþ spawnlayan fonksiyon
     public void SpawnBird()
     {
-        // Rastgele bir spawn noktasý seç
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        int x = Random.Range(0, spawnPoints.Length);
+        Vector2 spawnPoint = spawnPoints[x];
 
-        // Kuþu spawnla
-        GameObject bird = Instantiate(birdPrefab, spawnPoint.position, Quaternion.identity);
+        int direction;
 
-        
-
-        // Rastgele saða veya sola gitmesini saðla
-        int direction = 0;
-
-        // Rigidbody2D ile hareket etmesi
-        Rigidbody2D rb = bird.GetComponent<Rigidbody2D>();
-
-        if (direction == 0)
+        if (0 <= x && x <= 2) // Eðer x 0, 1 veya 2 ise
         {
-            // Sola git
-            rb.velocity = new Vector2(-birdSpeed, 0);
-            // Kuþun saða bakmasý için ters çevir
-            
+            direction = 1; // Soldan saða gidecek
         }
         else
         {
-            // Saða git
+            direction = 0; // Saðdan sola gidecek
+        }
+
+        GameObject bird;
+        if (direction == 0)
+        {
+            // Saðdan sola giden kuþ
+            bird = Instantiate(birdPrefabLeft, spawnPoint, Quaternion.identity);
+            // Kuþu sola hareket ettir
+            Rigidbody2D rb = bird.GetComponent<Rigidbody2D>();
+            rb.velocity = new Vector2(-birdSpeed, 0);
+        }
+        else
+        {
+            // Soldan saða giden kuþ
+            bird = Instantiate(birdPrefabRight, spawnPoint, Quaternion.identity);
+            // Kuþu saða hareket ettir
+            Rigidbody2D rb = bird.GetComponent<Rigidbody2D>();
             rb.velocity = new Vector2(birdSpeed, 0);
         }
     }
+
 }
