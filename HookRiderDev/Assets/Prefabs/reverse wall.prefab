@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -6800509493989187312}
   m_Layer: 3
   m_Name: reverse wall
-  m_TagString: Untagged
+  m_TagString: RightWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeed: 2
+  isGameStarted: 0
 --- !u!61 &-6800509493989187312
 BoxCollider2D:
   m_ObjectHideFlags: 0

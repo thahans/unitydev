@@ -39,11 +39,19 @@ public class HookShoot : MonoBehaviour
     private bool isCoroutineRunning = false;  // Coroutine'un çalışıp çalışmadığını kontrol etmek için
     private bool hasFallen = false;  // Karakterin düştüğünü kontrol etmek için
 
+    // Yeni sprite değişkenleri
+    public Sprite normalSprite;  // Karakterin normal sprite'ı
+    public Sprite leftWallSprite;  // Sol duvara çarptığında kullanılacak sprite
+    public Sprite rightWallSprite; // Sağ duvara çarptığında kullanılacak sprite
+    private SpriteRenderer spriteRenderer; // Karakterin sprite'ını değiştirmek için
+
     void Start()
     {
         startPosition = transform.position;  
         slowMotionZoneStartPos = slowMotionZoneTransform.position;  
         UpdateScoreText();  
+        spriteRenderer = GetComponent<SpriteRenderer>();  // SpriteRenderer bileşenini al
+        spriteRenderer.sprite = normalSprite;  // Başlangıçta normal sprite
     }
 
     void Update()
@@ -118,8 +126,6 @@ public class HookShoot : MonoBehaviour
             hasFallen = true;  // Düşme işleminin başladığını belirt
 
             // Burada görünmez karenin collider'ını kaldırıyoruz
-            // Eğer görünmez kare bir GameObject ise
-            // Destroy(slowMotionZoneTransform.gameObject); // veya collider'ını kapatabilirsin
             slowMotionZoneTransform.GetComponent<Collider2D>().enabled = false;
 
             // Karakterin aşağı düşmesini sağla
@@ -203,8 +209,18 @@ public class HookShoot : MonoBehaviour
                 hookTarget = hit.point;
                 isRetracting = true;
                 StopCoroutine(MoveHook());
-                
+
                 AddScore(1);  
+                
+                // Duvardan sekme durumuna göre sprite'ı değiştir
+                if (hit.collider.CompareTag("RightWall"))
+                {
+                    spriteRenderer.sprite = leftWallSprite;  // Sağ duvardan sektiğinde sol duvar sprite'ı
+                }
+                else if (hit.collider.CompareTag("LeftWall"))
+                {
+                    spriteRenderer.sprite = rightWallSprite;  // Sol duvardan sektiğinde sağ duvar sprite'ı
+                }
             }
 
             yield return null;
@@ -250,6 +266,9 @@ public class HookShoot : MonoBehaviour
                 StartCoroutine(SlowMotionAfterBounce());
                 isCoroutineRunning = true;  // Coroutine çalışıyor
             }
+
+            // Slow motion'a girdiğinde normal sprite'a dön
+            spriteRenderer.sprite = normalSprite; 
         }
     }
 
@@ -257,22 +276,22 @@ public class HookShoot : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("SlowMotionZone"))
         {
+            isSlowMotionTriggered = false;
             isInSlowMotionZone = false;
             hookAimScript.SetTriangleActive(false);
             isZoneMovingDown = false;  // Karayı durdur
-            ResetSlowMotionZonePosition();  // Kareyi başlangıç noktasına döndür
-            isCoroutineRunning = false;  // Coroutine çalışmayı bıraksın
+            isCoroutineRunning = false;  // Coroutine durduruldu
         }
     }
 
-    void AddScore(int points)
+    void AddScore(int amount)
     {
-        score += points;
+        score += amount;
         UpdateScoreText();
     }
 
     void UpdateScoreText()
     {
-        scoreText.text = score.ToString();
+        scoreText.text = "" + score;  
     }
 }

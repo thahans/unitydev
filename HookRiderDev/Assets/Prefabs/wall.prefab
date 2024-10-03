@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -1306286008033648571}
   m_Layer: 3
   m_Name: wall
-  m_TagString: Untagged
+  m_TagString: LeftWall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallSpeed: 2
+  isGameStarted: 0
 --- !u!61 &-1306286008033648571
 BoxCollider2D:
   m_ObjectHideFlags: 0

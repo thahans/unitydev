@@ -1003,8 +1003,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 6944408838128018373, guid: 4c888a856d3cdfd4e85bf7f6dbe063be, type: 3}
-  spawnerlowersecond: 2
-  spawneruppersecond: 5
+  spawnerlowersecond: 0.5
+  spawneruppersecond: 0.5
 --- !u!1 &1153144838
 GameObject:
   m_ObjectHideFlags: 0
@@ -1347,7 +1347,7 @@ GameObject:
   - component: {fileID: 1714925855}
   m_Layer: 0
   m_Name: abdullah
-  m_TagString: Player
+  m_TagString: NormalZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1519,6 +1519,9 @@ MonoBehaviour:
   hookAimScript: {fileID: 833996135}
   slowMotionZoneTransform: {fileID: 1153144841}
   slowMotionZoneMoveSpeed: 2
+  normalSprite: {fileID: 21300000, guid: 8fa1879ac0c25034d944f09a23951cc2, type: 3}
+  leftWallSprite: {fileID: -1919505191, guid: ccc5ce21280eb7d4ba36e08fc3926805, type: 3}
+  rightWallSprite: {fileID: 1066375408, guid: ccc5ce21280eb7d4ba36e08fc3926805, type: 3}
 --- !u!1 &1724453957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1564,8 +1567,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 8253400583110923266, guid: efca194ad4d954243b3ccdece2859a5b, type: 3}
-  spawnerlowersecond: 2
-  spawneruppersecond: 5
+  spawnerlowersecond: 0.5
+  spawneruppersecond: 0.5
 --- !u!1 &1811998837
 GameObject:
   m_ObjectHideFlags: 0
