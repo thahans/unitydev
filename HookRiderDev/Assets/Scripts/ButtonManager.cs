@@ -22,4 +22,13 @@ public class ButtonManager : MonoBehaviour
     {
         InfoSc.SetActive(false);
     }
+    public void oyungiris2()
+    {
+        Time.timeScale = 1; 
+        SceneManager.LoadScene("MainGameScene");
+    }
+    public void appexit()
+    {
+        Application.Quit();
+    }
 }

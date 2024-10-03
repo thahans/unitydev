@@ -45,6 +45,8 @@ public class HookShoot : MonoBehaviour
     public Sprite rightWallSprite; // Sağ duvara çarptığında kullanılacak sprite
     private SpriteRenderer spriteRenderer; // Karakterin sprite'ını değiştirmek için
 
+    public GameObject DeathScreen;
+
     void Start()
     {
         startPosition = transform.position;  
@@ -191,6 +193,7 @@ public class HookShoot : MonoBehaviour
 
     void ShowDeathScreen()
     {
+        DeathScreen.SetActive(true);
         Time.timeScale = 0; 
         Debug.Log("Ölüm ekranı açıldı!");
     }
