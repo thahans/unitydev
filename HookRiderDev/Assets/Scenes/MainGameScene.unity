@@ -706,7 +706,7 @@ Transform:
   m_GameObject: {fileID: 561563581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.61, y: 20.09, z: -0.043640602}
+  m_LocalPosition: {x: 3.9, y: 20.09, z: -0.043640602}
   m_LocalScale: {x: -3.38, y: 22.11, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1453,8 +1453,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 6944408838128018373, guid: 4c888a856d3cdfd4e85bf7f6dbe063be, type: 3}
-  spawnerlowersecond: 0.5
-  spawneruppersecond: 0.5
+  spawnerLowerSecond: 2
+  spawnerUpperSecond: 5
+  spawnLowerX: 1.7
+  spawnUpperX: 2.25
 --- !u!1 &1153144838
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,8 +2603,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 8253400583110923266, guid: efca194ad4d954243b3ccdece2859a5b, type: 3}
-  spawnerlowersecond: 0.5
-  spawneruppersecond: 0.5
+  spawnerLowerSecond: 2
+  spawnerUpperSecond: 5
+  spawnLowerX: -2.48
+  spawnUpperX: -1.6
 --- !u!1 &1775720869
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,7 +3234,7 @@ Transform:
   m_GameObject: {fileID: 1984323964}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.63, y: 20.09, z: -0.043640602}
+  m_LocalPosition: {x: -3.99, y: 20.09, z: -0.043640602}
   m_LocalScale: {x: -3.38, y: 22.11, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3263,7 +3267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7392669913231217916, guid: afbafda5affd25f46a03950190970623, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.63
+      value: -3.99
       objectReference: {fileID: 0}
     - target: {fileID: 7392669913231217916, guid: afbafda5affd25f46a03950190970623, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3446,7 +3450,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4508853658719801076, guid: 36ebaf3583ef1b945b9bfe04e1a3a656, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.61
+      value: 3.9
       objectReference: {fileID: 0}
     - target: {fileID: 4508853658719801076, guid: 36ebaf3583ef1b945b9bfe04e1a3a656, type: 3}
       propertyPath: m_LocalPosition.y

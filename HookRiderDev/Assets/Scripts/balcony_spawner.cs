@@ -5,13 +5,19 @@ public class WallSpawnerScript : MonoBehaviour
     public GameObject wallPrefab;  // Duvar prefab'ý
     private float spawnRate;       // Duvarlarýn kaç saniyede bir spawnlanacaðý
     private float timer = 0f;
-    public float spawnerlowersecond = 2f;
-    public float spawneruppersecond = 5f;
+
+    // Spawn süresi aralýðý
+    public float spawnerLowerSecond = 2f;
+    public float spawnerUpperSecond = 5f;
+
+    // Yeni eklenen x pozisyonu aralýðý
+    public float spawnLowerX = -5f;  // Minimum x pozisyonu
+    public float spawnUpperX = 5f;   // Maksimum x pozisyonu
 
     void Start()
     {
         // Ýlk baþta spawnRate'i rastgele ayarla
-        spawnRate = Random.Range(spawnerlowersecond, spawneruppersecond);
+        spawnRate = Random.Range(spawnerLowerSecond, spawnerUpperSecond);
     }
 
     void Update()
@@ -23,8 +29,8 @@ public class WallSpawnerScript : MonoBehaviour
             SpawnWall();
             timer = 0f; // Zamanlayýcýyý sýfýrla
 
-            // Bir sonraki spawn için spawnRate'i tekrar rastgele ayarla (2 ile 10 saniye arasýnda)
-            spawnRate = Random.Range(2f, 5f);
+            // Bir sonraki spawn için spawnRate'i tekrar rastgele ayarla
+            spawnRate = Random.Range(spawnerLowerSecond, spawnerUpperSecond);
         }
     }
 
@@ -33,8 +39,11 @@ public class WallSpawnerScript : MonoBehaviour
         // Duvarýn y ekseninde sabit bir konumda gelmesi
         float randomY = 6.81f;
 
+        // Duvarýn spawnlanacaðý rastgele x pozisyonu (seçilen iki x deðeri arasýnda)
+        float randomX = Random.Range(spawnLowerX, spawnUpperX);
+
         // Duvarýn spawnlanacaðý pozisyon
-        Vector3 spawnPosition = new Vector3(transform.position.x, randomY, 0f);
+        Vector3 spawnPosition = new Vector3(randomX, randomY, 0f);
 
         // Duvarý belirtilen pozisyonda spawnla
         Instantiate(wallPrefab, spawnPosition, Quaternion.identity);
