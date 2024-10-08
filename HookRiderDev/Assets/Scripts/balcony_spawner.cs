@@ -10,14 +10,18 @@ public class WallSpawnerScript : MonoBehaviour
     public float spawnerLowerSecond = 2f;
     public float spawnerUpperSecond = 5f;
 
+    // Ýlk duvar için spawn süresi aralýðý
+    public float initialLowerSecond = 1f;
+    public float initialUpperSecond = 2f;
+
     // Yeni eklenen x pozisyonu aralýðý
     public float spawnLowerX = -5f;  // Minimum x pozisyonu
     public float spawnUpperX = 5f;   // Maksimum x pozisyonu
 
     void Start()
     {
-        // Ýlk baþta spawnRate'i rastgele ayarla
-        spawnRate = Random.Range(spawnerLowerSecond, spawnerUpperSecond);
+        // Ýlk spawnRate'i ilk duvar için ayarla
+        spawnRate = Random.Range(initialLowerSecond, initialUpperSecond);
     }
 
     void Update()
