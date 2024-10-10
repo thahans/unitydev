@@ -9,6 +9,7 @@ public class HookShoot : MonoBehaviour
     public Transform triangle;   
     public float hookSpeed = 10f; 
     public LayerMask wallLayer;  
+    public LayerMask balconyLayer;  // Balkonlar için yeni layer
     public float bounceHeight = 5f;  
     public float bounceDuration = 1f;  
     public float gravity = -9.8f;  
@@ -201,33 +202,45 @@ public class HookShoot : MonoBehaviour
     IEnumerator MoveHook()
     {
         while (!isHooked)
+    {
+        currentHook.position = Vector3.MoveTowards(currentHook.position, hookTarget, hookSpeed * Time.deltaTime);
+        currentHook.localScale = new Vector3(initialHookScale.x, Vector3.Distance(currentHook.position, transform.position), initialHookScale.z);
+
+        // Hook'un duvara veya balkona çarpıp çarpmadığını kontrol et
+        RaycastHit2D hitWall = Physics2D.Raycast(currentHook.position, currentHook.up, raycastDistance, wallLayer);
+        RaycastHit2D hitBalcony = Physics2D.Raycast(currentHook.position, currentHook.up, raycastDistance, balconyLayer); // Balkon için raycast
+
+        if (hitBalcony.collider != null)
         {
-            currentHook.position = Vector3.MoveTowards(currentHook.position, hookTarget, hookSpeed * Time.deltaTime);
-            currentHook.localScale = new Vector3(initialHookScale.x, Vector3.Distance(currentHook.position, transform.position), initialHookScale.z);
-
-            RaycastHit2D hit = Physics2D.Raycast(currentHook.position, currentHook.up, raycastDistance, wallLayer);
-            if (hit.collider != null)
-            {
-                isHooked = true;
-                hookTarget = hit.point;
-                isRetracting = true;
-                StopCoroutine(MoveHook());
-
-                AddScore(1);  
-                
-                // Duvardan sekme durumuna göre sprite'ı değiştir
-                if (hit.collider.CompareTag("RightWall"))
-                {
-                    spriteRenderer.sprite = leftWallSprite;  // Sağ duvardan sektiğinde sol duvar sprite'ı
-                }
-                else if (hit.collider.CompareTag("LeftWall"))
-                {
-                    spriteRenderer.sprite = rightWallSprite;  // Sol duvardan sektiğinde sağ duvar sprite'ı
-                }
-            }
-
-            yield return null;
+            // Balkonla çarpışma: Hook'u yok et, slow motion alanını devre dışı bırak ve karakteri düşür
+            Destroy(currentHook.gameObject);
+            slowMotionZoneTransform.gameObject.SetActive(false);  // Slow motion alanını devre dışı bırak
+            RemoveColliderAndDropCharacter(); // Karakteri düşür
+            yield break;
         }
+
+        if (hitWall.collider != null)
+        {
+            isHooked = true;
+            hookTarget = hitWall.point;
+            isRetracting = true;
+            StopCoroutine(MoveHook());
+
+            AddScore(1);  
+            
+            // Duvardan sekme durumuna göre sprite'ı değiştir
+            if (hitWall.collider.CompareTag("RightWall"))
+            {
+                spriteRenderer.sprite = leftWallSprite;  // Sağ duvardan sektiğinde sol duvar sprite'ı
+            }
+            else if (hitWall.collider.CompareTag("LeftWall"))
+            {
+                spriteRenderer.sprite = rightWallSprite;  // Sol duvardan sektiğinde sağ duvar sprite'ı
+            }
+        }
+
+        yield return null;
+    }
     }
 
     void RetractHook()
