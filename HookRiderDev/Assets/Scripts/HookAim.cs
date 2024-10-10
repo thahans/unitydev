@@ -8,7 +8,7 @@ public class HookAim : MonoBehaviour
     public Transform centerPoint; 
     public float radius = 1f; 
     public float rotationSpeed = 100f; 
-    private float angle = 90f; 
+    private float angle = 0f; // Başlangıç açısını ortada tutmak için 0 olarak güncelledik
     private bool movingRight = true;
     private bool isActive = true;  // Üçgenin aktif olup olmadığını kontrol etmek için
 
@@ -33,18 +33,18 @@ public class HookAim : MonoBehaviour
         if (movingRight)
         {
             angle -= rotationAmount;
-            if (angle <= -90f)
+            if (angle <= -72f) // -90 yerine -75 ile sınırlandırıldı
             {
-                angle = -90f;
+                angle = -72f;
                 movingRight = false;
             }
         }
         else
         {
             angle += rotationAmount;
-            if (angle >= 90f)
+            if (angle >= 72f) // 90 yerine 75 ile sınırlandırıldı
             {
-                angle = 90f;
+                angle = 72f;
                 movingRight = true;
             }
         }
