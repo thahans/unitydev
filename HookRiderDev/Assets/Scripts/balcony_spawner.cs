@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WallSpawnerScript : MonoBehaviour
+public class BalconySpawner : MonoBehaviour
 {
     public GameObject wallPrefab;  // Duvar prefab'ý
     private float spawnRate;       // Duvarlarýn kaç saniyede bir spawnlanacaðý

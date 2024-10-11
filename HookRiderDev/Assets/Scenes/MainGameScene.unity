@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 7637262215500240158, guid: 36ebaf3583ef1b945b9bfe04e1a3a656, type: 3}
-  spawnInterval: 3
+  spawnInterval: 2
   spawnPoint: {fileID: 561563583}
   wallLifetime: 20
 --- !u!4 &561563583
@@ -987,6 +987,7 @@ GameObject:
   - component: {fileID: 609907342}
   - component: {fileID: 609907343}
   - component: {fileID: 609907344}
+  - component: {fileID: 609907345}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1036,6 +1037,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countdownText: {fileID: 756184997}
   countdownTime: 3
+--- !u!114 &609907345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 609907341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba493b04389dde44ab9e56f105b1f512, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 1836691411}
+  balcony_spawner_left: {fileID: 1724453957}
+  balcony_spawner_right: {fileID: 953875261}
+  bird_spawner: {fileID: 1470412676}
+  WallPrefab: {fileID: 6738032318566437531, guid: afbafda5affd25f46a03950190970623, type: 3}
+  ReverseWallPrefab: {fileID: 7637262215500240158, guid: 36ebaf3583ef1b945b9bfe04e1a3a656, type: 3}
+  BalconyPrefab: {fileID: 8253400583110923266, guid: efca194ad4d954243b3ccdece2859a5b, type: 3}
+  ReverseBalconyPrefab: {fileID: 6944408838128018373, guid: 4c888a856d3cdfd4e85bf7f6dbe063be, type: 3}
 --- !u!1 &756184995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1355,25 +1376,6 @@ MonoBehaviour:
   centerPoint: {fileID: 1954069627}
   radius: 0.72
   rotationSpeed: 870
---- !u!1 &875830818 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6738032318566437531, guid: afbafda5affd25f46a03950190970623, type: 3}
-  m_PrefabInstance: {fileID: 2940824365138439911}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &875830821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875830818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e424db2ca0596c2408ccb3dd921e9371, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fallSpeed: 2
-  isGameStarted: 0
 --- !u!1 &888836850
 GameObject:
   m_ObjectHideFlags: 0
@@ -2156,8 +2158,8 @@ MonoBehaviour:
   - {x: 6, y: 2.5}
   - {x: 6, y: 3}
   minSpawnTime: 1
-  maxSpawnTime: 2
-  birdSpeed: 3
+  maxSpawnTime: 5
+  birdSpeed: 2
 --- !u!4 &1470412678
 Transform:
   m_ObjectHideFlags: 0
@@ -3184,7 +3186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallPrefab: {fileID: 6738032318566437531, guid: afbafda5affd25f46a03950190970623, type: 3}
-  spawnInterval: 2.5
+  spawnInterval: 2
   spawnPoint: {fileID: 1984323966}
   wallLifetime: 20
 --- !u!4 &1984323966
@@ -3215,6 +3217,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5765653409056684808, guid: afbafda5affd25f46a03950190970623, type: 3}
+      propertyPath: fallSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6738032318566437531, guid: afbafda5affd25f46a03950190970623, type: 3}
       propertyPath: m_Name
       value: wall
@@ -3267,14 +3273,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5765653409056684808, guid: afbafda5affd25f46a03950190970623, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6738032318566437531, guid: afbafda5affd25f46a03950190970623, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 875830821}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afbafda5affd25f46a03950190970623, type: 3}
 --- !u!1001 &6475725596275837394
 PrefabInstance:
@@ -3410,6 +3412,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7552693330425809971, guid: 36ebaf3583ef1b945b9bfe04e1a3a656, type: 3}
+      propertyPath: fallSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4508853658719801076, guid: 36ebaf3583ef1b945b9bfe04e1a3a656, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.9

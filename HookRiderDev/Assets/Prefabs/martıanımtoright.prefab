@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26db33e1e89696648a3ee30b9283db88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offScreenThresholdLeft: -5
-  offScreenThresholdRight: 5
-  destroyDelay: 3
+  offScreenThresholdLeft: -8
+  offScreenThresholdRight: 8
+  destroyDelay: 5
 --- !u!95 &4487232944843009985
 Animator:
   serializedVersion: 5

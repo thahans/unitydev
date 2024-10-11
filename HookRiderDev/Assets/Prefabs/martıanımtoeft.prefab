@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offScreenThresholdLeft: -8
   offScreenThresholdRight: 8
-  destroyDelay: 3
+  destroyDelay: 5
 --- !u!95 &4487232944843009985
 Animator:
   serializedVersion: 5
